@@ -1,0 +1,51 @@
+
+/*交换排序*/
+void BubbleSort(ElemType A[], int n)
+{
+	bool flag;
+	for(int i=0; i<n-1; i++)
+	{
+		flag = false;
+		for(int j=n-1; j>i; j--)
+		{
+			if(A[j-1]>A[j])
+			{
+				swap(A[j-1], A[j]);
+				flag = true;
+			}
+		}
+		if(!flag)
+		{
+			return;
+		}
+	}
+}
+
+void QuickSort(ElemType A[], int left, int right)
+{
+	if(left < right)
+	{
+		int pivotpos = Parition(A, left, right);
+		QuickSort(A, left, pivotpos-1);
+		QuickSort(A, pivotpos+1, right);
+	}
+}
+int Partition(ElemType A[], int left, int right)
+{
+	ElemType pivot = A[left];
+	while(left != right)
+	{
+		while(left<right && A[right] >= pivot)
+		{
+			right--;
+		}
+		A[left] = A[right];
+		while(left<right && A[left] <= pivot)
+		{
+			left++;
+		}
+		A[right] = A[left];
+	}
+	A[left] = pivot;
+	return left;
+}

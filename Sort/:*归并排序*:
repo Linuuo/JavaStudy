@@ -1,0 +1,33 @@
+/*归并排序*/
+//合并
+ElemType *B = (ElemType *)malloc((n+1) * sizeof(ElemType));
+void Merge(ElemType A[], int left, int mid, int right)
+{
+	for(int i=left; i<=right; i++)
+	{
+		B[i] = A[i];
+	}
+	for(int i=left,j=mid+1, k=left; i<=mid && j<=right; k++)
+	{
+		if(B[i]>=B[j])
+		{
+			A[k] = B[i++];
+		}
+		else
+		{
+			A[k] = B[j++];
+		}
+	}
+	while(i <= mid) A[k++]=A[i++];
+	while(j <= right) A[k++]=A[j++];
+}
+//排序
+void MergeSort(ElemType A[], int left, int right)
+{
+	if(left < right){
+		int mid = (right - left) / 2 + left;
+		MergeSort(A, left, mid);
+		MergeSort(A, mid+1, right);
+		Merge(A, left, mid, right);
+	}
+}
