@@ -1,0 +1,40 @@
+/*BFS*/
+
+bool Visited[MAX_VERTEX_NUM];
+
+void BFSTraverse(Gragh G)
+{
+	for(int v=0; v<G.vertex_num; v++) //初始化
+		Visited[v] = FALSE;
+
+	InitQueue(Q); //初始化队列
+
+	for(int v=0; v<G.vertex_num; v++) //保证每个连通分量都被遍历
+	{
+		if(!Visited[v])
+		{
+			BFS(G, v);
+		}
+	}
+
+}
+
+void BFS(Graph G, int v)
+{
+	visit(v); //访问顶点
+	Visited[v] = TRUE;
+	EnQueue(Q, v); //被访问的顶点入队
+	while(!isEmpty(Q)) //队列不为空时，让队头元素出队
+	{
+		Delete(Q, v); 
+		for(w=FirstNeighbor(G, v); w>0; W=NextNeighbor(G, v)) //访问出队顶点，并将其所有未被访问过的顶点入队
+		{
+			if(!Visited[w])
+			{
+				visit(w);
+				Visited[w] = TRUE;
+				EnQueue(Q, w);
+			}
+		}
+	}
+}

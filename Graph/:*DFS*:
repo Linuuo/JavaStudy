@@ -1,0 +1,31 @@
+/*DFS*/
+
+bool Visited[MAX_VERTEX];
+
+void DFSTravese(Graph G)
+{
+	
+	for(int v=0; v<G.vernum; v++) //初始化 1
+		Visited[v] = FALSE;
+
+	for(int v=0; v<G.vernum; v++) //保证每个连通分量都被遍历
+	{
+		if(!Visited[v])
+		{
+			DSF(G,v);
+		}
+	}
+}
+
+void DFS(Grahp G, int v)
+{
+	visit(v); //访问顶点v
+	Visited[v] = TRUE; //标记被访问顶点
+	for(w=FirsNeighbor; w>0; w=NextNeighbor) //遍历顶点v的所有相邻顶点
+	{
+		if(!Visited[w]) //判断顶点w是否已被访问
+		{
+			DFS(G,w); //递归调用DFS
+		}
+	}
+}
